@@ -14,7 +14,7 @@ const findIndex = (list, attr) => value => {
 
 
 const insert = (list, attr, item) => {
-  // SHOULD IMPLEMENT
+  // SHOULD IMPLEMENT a preserving order insertion
   return list;
 }
 
@@ -39,8 +39,7 @@ export const List = ({ attr, initial, initialOrder}) => {
     insert: item => List({
       attr,
       initial: insert(items, attr, item),
-      // You should reverse this bool if your insertion preserve order
-      initialOrder: false
+      initialOrder: true
     })
   }
 }

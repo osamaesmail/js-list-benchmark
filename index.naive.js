@@ -1,36 +1,36 @@
-// Leave as it is
-const pipe = (f, g) => (...a) => g(f(...a))
+import { pipe } from 'ramda'
 
+const getValue = (o, attr) => attr ? o[attr] : o
 
-const sort = a => {
-    // SHOULD OPTIMIZE
-    return a.sort((a, b) => a - b);
+export const sort = (list, attr) => {
+  // SHOULD OPTIMIZE
+  return list.sort((a, b) => getValue(a, attr) - getValue(b, attr));
 };
 
-const findIndex = a => b => {
-    // SHOULD OPTIMIZE
-    return a.indexOf(b);
+export const findIndex = (list, attr) => value => {
+  // SHOULD OPTIMIZE
+  return list.findIndex(i => getValue(i, attr) === value);
 }
 
 
-const insert = a => b => {
-    // SHOULD OPTIMIZE
-    return [...a, b];
+export const insert = (list, attr) => item => {
+  // SHOULD OPTIMIZE
+  return [...list, item];
 }
 
 
-const remove = a => b => {
-    // SHOULD OPTIMIZE
-    return a.filter(i => i !== b);
+export const remove = (list, attr) => value => {
+  // SHOULD OPTIMIZE
+  return list.filter(i => getValue(i) !== value);
 }
 
-export const List = (initial) => {
-    const items = sort(initial);
+export const List = (initial, attr) => {
+  const items = sort(initial, attr);
 
-    return {
-        items,
-        insert: pipe(insert(items), List),
-        remove: pipe(remove(items), List),
-        findIndex: findIndex(items)
-    }
+  return {
+    items,
+    insert: pipe(insert(items, attr), List),
+    remove: pipe(remove(items, attr), List),
+    findIndex: findIndex(items, attr)
+  }
 }

@@ -13,8 +13,8 @@ const nearStart = values[random(0, 50)]
 const nearMiddle = values[Math.ceil(itemsCount / 2) + random(-25, 25)]
 const nearEnd = values[itemsCount - random(0, 50)]
 
-const naiveList = naive.List({ initial: randomItems, attr: 'value' })
-const mainList = main.List({ initial: randomItems, attr: 'value' })
+const naiveList = naive.List({ initial: randomItems, sortKey: 'value' })
+const mainList = main.List({ initial: randomItems, sortKey: 'value' })
 
 // FIND START
 b.suite(

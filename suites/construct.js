@@ -14,11 +14,11 @@ b.suite(
   'Construct with an already sorted list of items',
 
   b.add('naive', () => {
-    naive.List({ initial: sortedItems, attr: 'value', initialOrder: true })
+    naive.List({ initial: sortedItems, sortKey: 'value', initialOrder: true })
   }),
 
   b.add('main', () => {
-    main.List({ initial: sortedItems, attr: 'value', initialOrder: true })
+    main.List({ initial: sortedItems, sortKey: 'value', initialOrder: true })
   }),
 
   b.cycle(),
@@ -31,11 +31,11 @@ b.suite(
   'Construct unsorted list of items',
 
   b.add('naive', () => {
-    naive.List({ initial: randomItems, attr: 'value' })
+    naive.List({ initial: randomItems, sortKey: 'value' })
   }),
 
   b.add('main', () => {
-    main.List({ initial: randomItems, attr: 'value' })
+    main.List({ initial: randomItems, sortKey: 'value' })
   }),
 
   b.cycle(),

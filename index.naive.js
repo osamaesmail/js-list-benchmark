@@ -1,42 +1,42 @@
 import { pipe, always, applySpec } from 'ramda';
 
-const getValue = (o, attr) => attr ? o[attr] : o
+const getValue = (o, sortKey) => sortKey ? o[sortKey] : o
 
-const sort = (list, attr) => {
+const sort = (list, sortKey) => {
   // SHOULD OPTIMIZE
-  return list.sort((a, b) => getValue(a, attr) - getValue(b, attr));
+  return list.sort((a, b) => getValue(a, sortKey) - getValue(b, sortKey));
 };
 
-const findIndex = (list, attr) => value => {
+const findIndex = (list, sortKey) => value => {
   // SHOULD OPTIMIZE
-  return list.findIndex(i => getValue(i, attr) === value);
+  return list.findIndex(i => getValue(i, sortKey) === value);
 }
 
-const insert = (list, attr, item) => {
+const insert = (list, sortKey, item) => {
   // SHOULD OPTIMIZE
   return [...list, item];
 }
 
-const remove = (list, attr, value) => {
+const remove = (list, sortKey, value) => {
   // SHOULD OPTIMIZE
   return list.filter(i => getValue(i) !== value);
 }
 
-export const List = ({ attr, initial, initialOrder}) => {
-  const items = initialOrder ? initial : sort(initial, attr);
+export const List = ({ sortKey, initial, initialOrder}) => {
+  const items = initialOrder ? initial : sort(initial, sortKey);
 
   return {
     items,
-    findIndex: findIndex(items, attr),
+    findIndex: findIndex(items, sortKey),
     remove: value => List({
-      attr,
-      initial: remove(items, attr, value),
+      sortKey,
+      initial: remove(items, sortKey, value),
       initialOrder: true
     }),
 
     insert: item => List({
-      attr,
-      initial: insert(items, attr, item),
+      sortKey,
+      initial: insert(items, sortKey, item),
       // You should reverse this bool if your insertion preserve order
       initialOrder: false
     })

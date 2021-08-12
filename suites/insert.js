@@ -8,8 +8,8 @@ import * as naive from '../index.naive.js'
 const itemsCount = 9999
 const randomItems = getRandomItems(itemsCount)
 
-const naiveList = naive.List({ initial: randomItems, attr: 'value' })
-const mainList = main.List({ initial: randomItems, attr: 'value' })
+const naiveList = naive.List({ initial: randomItems, sortKey: 'value' })
+const mainList = main.List({ initial: randomItems, sortKey: 'value' })
 
 // FIND START
 b.suite(
